@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="b1d2cee2-9f1e-4059-98c1-888af448452f" SharePointProductVersion="15.0">
+  <Assemblies>
+    <Assembly Location="MaintenanceServers2019.dll" DeploymentTarget="GlobalAssemblyCache">
+      <SafeControls>
+        <SafeControl Assembly="MaintenanceServers2019, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4ea1eb0a38b57050" Namespace="MaintenanceServers2019.VisualWebPart1" TypeName="*" />
+      </SafeControls>
+    </Assembly>
+  </Assemblies>
+  <TemplateFiles>
+    <TemplateFile Location="CONTROLTEMPLATES\MaintenanceServers2019\VisualWebPart1\VisualWebPart1UserControl.ascx" />
+  </TemplateFiles>
+  <FeatureManifests>
+    <FeatureManifest Location="MaintenanceServers2019_Feature1\Feature.xml" />
+  </FeatureManifests>
+</Solution>
