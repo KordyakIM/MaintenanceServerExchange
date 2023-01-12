@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Id="6f27e73e-a940-46cc-8b0e-d94d71849b52" Scope="Site" Title="MaintenanceServers2019 Feature1">
-  <ElementManifests>
-    <ElementManifest Location="VisualWebPart1\Elements.xml" />
-    <ElementFile Location="VisualWebPart1\VisualWebPart1.webpart" />
-  </ElementManifests>
-</Feature>
