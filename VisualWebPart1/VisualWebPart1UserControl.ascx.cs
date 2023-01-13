@@ -233,7 +233,7 @@ namespace MaintenanceServers2019.VisualWebPart1
                         ResultBox.Text = string.Empty;
                         string check = string.Empty;
                         //if (output.) {
-                            for (int i = 0; i < CheckBoxList_Norilsk.Items.Count; i++)
+                            for (int i = 0; i < CheckBoxList_array01.Items.Count; i++)
                             {
                                 foreach (PSObject outp in output)
                                 {
@@ -262,21 +262,21 @@ namespace MaintenanceServers2019.VisualWebPart1
                                 }
                             }
 
-                            for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+                            for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
                             {
                                 foreach (PSObject outp in output)
                                 {
                                     get_value_outp(outp);
-                                    if (string.Equals(CheckBoxList_Talnakh.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & (ClusterNodeStatus.ToString().Equals("Paused") || ClusterNodeStatus.ToString().Equals("Error") || DBCopyAutoActivationPolicy.Equals("Blocked")) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
+                                    if (string.Equals(CheckBoxList_array02.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & (ClusterNodeStatus.ToString().Equals("Paused") || ClusterNodeStatus.ToString().Equals("Error") || DBCopyAutoActivationPolicy.Equals("Blocked")) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
                                     {
-                                        this.CheckBoxList_Talnakh.Items[i].Text = CheckBoxList_Talnakh.Items[i].Text.ToUpper();
+                                        this.CheckBoxList_array02.Items[i].Text = CheckBoxList_array02.Items[i].Text.ToUpper();
                                         //check life server through ping
                                         PingReply reply = pinger.Send(NameMailboxServer);
                                         pingable = reply.Status == IPStatus.Success;
                                         check += NameMailboxServer;
                                         Add_to_GridTable(NameMailboxServer.ToUpper(), "Start", pingable.ToString(), ClusterNodeStatus, DBCopyAutoActivationPolicy, DBCopyActivationDisabledAndMoveNow, DBPreference, MountedDatabase, QueueNumber, MailboxNumber, TimeStamp);
                                     }
-                                    else if (string.Equals(CheckBoxList_Talnakh.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
+                                    else if (string.Equals(CheckBoxList_array02.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
                                     {
                                         //check life server through ping
                                         PingReply reply = pinger.Send(NameMailboxServer);
@@ -285,10 +285,10 @@ namespace MaintenanceServers2019.VisualWebPart1
                                         Add_to_GridTable(NameMailboxServer.ToLower(), "Stop", pingable.ToString(), ClusterNodeStatus, DBCopyAutoActivationPolicy, DBCopyActivationDisabledAndMoveNow, DBPreference, MountedDatabase, QueueNumber, MailboxNumber, TimeStamp);
                                     }
                                 }
-                                result_upper = Char.IsLower(CheckBoxList_Talnakh.Items[i].Text, 2);
+                                result_upper = Char.IsLower(CheckBoxList_array02.Items[i].Text, 2);
                                 if (result_upper)
                                 {
-                                    comboBox.Items.Add(new ListItem(CheckBoxList_Talnakh.Items[i].Text, CheckBoxList_Talnakh.Items[i].Text));
+                                    comboBox.Items.Add(new ListItem(CheckBoxList_array02.Items[i].Text, CheckBoxList_array02.Items[i].Text));
                                 }
                             }
                         //}
@@ -302,15 +302,6 @@ namespace MaintenanceServers2019.VisualWebPart1
                         }
                     }
                     comboBox.DataBind();
-                    //for (int i = 0; i < comboBox.Items.Count; i++)
-                    //{
-                        //result_upper = Char.IsLower(comboBox.Items[i].Text, 2);
-                        //if (result_upper & !check_comboBox)
-                        //{
-                          //  check_comboBox = true;
-                            //comboBox.SelectedIndex = i;
-                        //}
-                    //}
                     GridView1.DataSource = dt;
                     GridView1.DataBind();
                 }
@@ -329,13 +320,13 @@ namespace MaintenanceServers2019.VisualWebPart1
                     comboBox.SelectedValue = CheckBoxList_array01.Items[i].Text;
                 }
             }
-            for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+            for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
             {
-                result_lower = Char.IsLower(CheckBoxList_Talnakh.Items[i].Text, 2);
-                if (!CheckBoxList_Talnakh.Items[i].Selected & !check_comboBox & result_lower)
+                result_lower = Char.IsLower(CheckBoxList_array02.Items[i].Text, 2);
+                if (!CheckBoxList_array02.Items[i].Selected & !check_comboBox & result_lower)
                 {
                     check_comboBox = true;
-                    comboBox.SelectedValue = CheckBoxList_Talnakh.Items[i].Text;
+                    comboBox.SelectedValue = CheckBoxList_array02.Items[i].Text;
                 }
             }
             //check life server through ping
@@ -346,7 +337,6 @@ namespace MaintenanceServers2019.VisualWebPart1
             Page.Server.ScriptTimeout = 6400; // specify the timeout to 3600 seconds
             using (SPLongOperation operation = new SPLongOperation(this.Page))
             {
-                //string path = @"C:\work\Logs\Maintenance.log";
                 ResultBox.Text = string.Empty;
                 if (TextBox1.Text == "Exchange")
                 {
@@ -361,11 +351,11 @@ namespace MaintenanceServers2019.VisualWebPart1
                                 check += CheckBoxList_array01.Items[i].Text;
                             }
                         }
-                        for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+                        for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
                         {
-                            if (CheckBoxList_Talnakh.Items[i].Selected)
+                            if (CheckBoxList_array02.Items[i].Selected)
                             {
-                                check += CheckBoxList_Talnakh.Items[i].Text;
+                                check += CheckBoxList_array02.Items[i].Text;
                             }
                         }
                         if (System.Text.RegularExpressions.Regex.IsMatch(check, "sn", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
@@ -406,7 +396,6 @@ namespace MaintenanceServers2019.VisualWebPart1
                                                             }
                                                         }
                                                     }
-                                                    //ResultBox.Text += "Username: " + HttpContext.Current.User.Identity.Name.Replace("0#.w|", "") + "\r\n";
                                                     ResultBox.Text += builder.ToString();
                                                 }
                                             }
@@ -418,16 +407,16 @@ namespace MaintenanceServers2019.VisualWebPart1
                                             comboBox.Items.Add(new ListItem(CheckBoxList_array01.Items[i].Text, CheckBoxList_array01.Items[i].Text));
                                         }
                                     }
-                                    for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+                                    for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
                                     {
-                                        if (CheckBoxList_Talnakh.Items[i].Selected)
+                                        if (CheckBoxList_array02.Items[i].Selected)
                                         {
                                             //check life server through ping
-                                            PingReply reply = pinger.Send(CheckBoxList_Talnakh.Items[i].Text);
+                                            PingReply reply = pinger.Send(CheckBoxList_array02.Items[i].Text);
                                             pingable = reply.Status == IPStatus.Success;
                                             if (pingable)
                                             {
-                                                script = @"C:\folder\Start-ExchangeServerMaintenanceMode.ps1 -SourceServer '" + CheckBoxList_Talnakh.Items[i].Text + "' -TargetServerFQDN '" + target_server + ".npr.nornick.ru' -UserName " + HttpContext.Current.User.Identity.Name.Replace("0#.w|", "") + " -Goal '" + TextBox_Goal.Text + "'";
+                                                script = @"C:\folder\Start-ExchangeServerMaintenanceMode.ps1 -SourceServer '" + CheckBoxList_array02.Items[i].Text + "' -TargetServerFQDN '" + target_server + ".npr.nornick.ru' -UserName " + HttpContext.Current.User.Identity.Name.Replace("0#.w|", "") + " -Goal '" + TextBox_Goal.Text + "'";
                                                 using (ps = PowerShell.Create())
                                                 {
                                                     var builder = new StringBuilder();
@@ -441,23 +430,22 @@ namespace MaintenanceServers2019.VisualWebPart1
                                                         if (!outp.BaseObject.ToString().Contains("tmp"))
                                                         {
                                                             builder.Append(outp.BaseObject.ToString() + "\r\n");
-                                                            if (outp.BaseObject.ToString().Contains("SUCCESS: Done! Server " + CheckBoxList_Talnakh.Items[i].Text + " is put succesfully into maintenance mode"))
+                                                            if (outp.BaseObject.ToString().Contains("SUCCESS: Done! Server " + CheckBoxList_array02.Items[i].Text + " is put succesfully into maintenance mode"))
                                                             {
-                                                                this.CheckBoxList_Talnakh.Items[i].Text = CheckBoxList_Talnakh.Items[i].Text.ToUpper();
-                                                                Name_Server = CheckBoxList_Talnakh.Items[i].Text.ToUpper();
+                                                                this.CheckBoxList_array02.Items[i].Text = CheckBoxList_array02.Items[i].Text.ToUpper();
+                                                                Name_Server = CheckBoxList_array02.Items[i].Text.ToUpper();
                                                             }
                                                         }
                                                     }
-                                                    //ResultBox.Text += "Username: " + HttpContext.Current.User.Identity.Name.Replace("0#.w|", "") + "\r\n";
                                                     ResultBox.Text += builder.ToString();
                                                 }
                                             }
-                                            else { ResultBox.Text += "\r\n" + "No ping -> " + CheckBoxList_Talnakh.Items[i].Text; }
+                                            else { ResultBox.Text += "\r\n" + "No ping -> " + CheckBoxList_array02.Items[i].Text; }
                                         }
-                                        result_lower = Char.IsLower(CheckBoxList_Talnakh.Items[i].Text, 2);
+                                        result_lower = Char.IsLower(CheckBoxList_array02.Items[i].Text, 2);
                                         if (result_lower)
                                         {
-                                            comboBox.Items.Add(new ListItem(CheckBoxList_Talnakh.Items[i].Text, CheckBoxList_Talnakh.Items[i].Text));
+                                            comboBox.Items.Add(new ListItem(CheckBoxList_array02.Items[i].Text, CheckBoxList_array02.Items[i].Text));
                                         }
                                     }
                                     comboBox.DataBind();
@@ -500,21 +488,21 @@ namespace MaintenanceServers2019.VisualWebPart1
                                             }
                                         }
 
-                                        for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+                                        for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
                                         {
                                             foreach (PSObject outp in output)
                                             {
                                                 get_value_outp(outp);
-                                                if (string.Equals(CheckBoxList_Talnakh.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & (ClusterNodeStatus.ToString().Equals("Paused") || ClusterNodeStatus.ToString().Equals("Error") || DBCopyAutoActivationPolicy.Equals("Blocked")) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
+                                                if (string.Equals(CheckBoxList_array02.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & (ClusterNodeStatus.ToString().Equals("Paused") || ClusterNodeStatus.ToString().Equals("Error") || DBCopyAutoActivationPolicy.Equals("Blocked")) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
                                                 {
-                                                    this.CheckBoxList_Talnakh.Items[i].Text = CheckBoxList_Talnakh.Items[i].Text.ToUpper();
+                                                    this.CheckBoxList_array02.Items[i].Text = CheckBoxList_array02.Items[i].Text.ToUpper();
                                                     //check life server through ping
                                                     PingReply reply = pinger.Send(NameMailboxServer);
                                                     pingable = reply.Status == IPStatus.Success;
                                                     check += NameMailboxServer;
                                                     Add_to_GridTable(NameMailboxServer.ToUpper(), "Start", pingable.ToString(), ClusterNodeStatus, DBCopyAutoActivationPolicy, DBCopyActivationDisabledAndMoveNow, DBPreference, MountedDatabase, QueueNumber, MailboxNumber, TimeStamp);
                                                 }
-                                                else if (string.Equals(CheckBoxList_Talnakh.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
+                                                else if (string.Equals(CheckBoxList_array02.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
                                                 {
                                                     //check life server through ping
                                                     PingReply reply = pinger.Send(NameMailboxServer);
@@ -548,11 +536,11 @@ namespace MaintenanceServers2019.VisualWebPart1
                                             }
                                         }
                                     }
-                                    for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+                                    for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
                                     {
-                                        if (CheckBoxList_Talnakh.Items[i].Selected)
+                                        if (CheckBoxList_array02.Items[i].Selected)
                                         {
-                                            result_upper = Char.IsUpper(CheckBoxList_Talnakh.Items[i].Text, 2);
+                                            result_upper = Char.IsUpper(CheckBoxList_array02.Items[i].Text, 2);
                                             if (result_upper)
                                             {
                                                 bool_check_email = true;
@@ -585,13 +573,13 @@ namespace MaintenanceServers2019.VisualWebPart1
                     comboBox.SelectedValue = CheckBoxList_array01.Items[i].Text;
                 }
             }
-            for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+            for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
             {
-                result_lower = Char.IsLower(CheckBoxList_Talnakh.Items[i].Text, 2);
-                if (!CheckBoxList_Talnakh.Items[i].Selected & !check_comboBox & result_lower)
+                result_lower = Char.IsLower(CheckBoxList_array02.Items[i].Text, 2);
+                if (!CheckBoxList_array02.Items[i].Selected & !check_comboBox & result_lower)
                 {
                     check_comboBox = true;
-                    comboBox.SelectedValue = CheckBoxList_Talnakh.Items[i].Text;
+                    comboBox.SelectedValue = CheckBoxList_array02.Items[i].Text;
                 }
             }
 
@@ -603,7 +591,6 @@ namespace MaintenanceServers2019.VisualWebPart1
             Page.Server.ScriptTimeout = 6400; // specify the timeout to 3600 seconds
             using (SPLongOperation operation = new SPLongOperation(this.Page))
             {
-                //string path = @"C:\work\Logs\Maintenance.log";
                 ResultBox.Text = string.Empty;
                 if (TextBox1.Text == "Exchange")
                 {
@@ -617,11 +604,11 @@ namespace MaintenanceServers2019.VisualWebPart1
                                 check += CheckBoxList_array01.Items[i].Text;
                             }
                         }
-                        for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+                        for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
                         {
-                            if (CheckBoxList_Talnakh.Items[i].Selected)
+                            if (CheckBoxList_array02.Items[i].Selected)
                             {
-                                check += CheckBoxList_Talnakh.Items[i].Text;
+                                check += CheckBoxList_array02.Items[i].Text;
                             }
                         }
                         if (System.Text.RegularExpressions.Regex.IsMatch(check, "sn", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
@@ -660,7 +647,6 @@ namespace MaintenanceServers2019.VisualWebPart1
                                                         }
                                                     }
                                                 }
-                                                //ResultBox.Text += "Username: " + HttpContext.Current.User.Identity.Name.Replace("0#.w|", "") + "\r\n";
                                                 ResultBox.Text += builder.ToString();
                                             }
                                         }
@@ -672,16 +658,16 @@ namespace MaintenanceServers2019.VisualWebPart1
                                         comboBox.Items.Add(new ListItem(CheckBoxList_array01.Items[i].Text, CheckBoxList_array01.Items[i].Text));
                                     }
                                 }
-                                for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+                                for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
                                 {
-                                    if (CheckBoxList_Talnakh.Items[i].Selected)
+                                    if (CheckBoxList_array02.Items[i].Selected)
                                     {
                                         //check life server through ping
-                                        PingReply reply = pinger.Send(CheckBoxList_Talnakh.Items[i].Text);
+                                        PingReply reply = pinger.Send(CheckBoxList_array02.Items[i].Text);
                                         pingable = reply.Status == IPStatus.Success;
                                         if (pingable)
                                         {
-                                            script = @"C:\folder\Stop-ExchangeServerMaintenanceMode.ps1 -Server '" + CheckBoxList_Talnakh.Items[i].Text + "' -UserName " + HttpContext.Current.User.Identity.Name.Replace("0#.w|", "") + " -Goal '" + TextBox_Goal.Text + "'";
+                                            script = @"C:\folder\Stop-ExchangeServerMaintenanceMode.ps1 -Server '" + CheckBoxList_array02.Items[i].Text + "' -UserName " + HttpContext.Current.User.Identity.Name.Replace("0#.w|", "") + " -Goal '" + TextBox_Goal.Text + "'";
                                             using (ps = PowerShell.Create())
                                             {
                                                 var builder = new StringBuilder();
@@ -695,23 +681,22 @@ namespace MaintenanceServers2019.VisualWebPart1
                                                     if (!outp.BaseObject.ToString().Contains("tmp"))
                                                     {
                                                         builder.Append(outp.BaseObject.ToString() + "\r\n");
-                                                        if (string.Equals(outp.BaseObject.ToString(), "SUCCESS: Done! Server " + CheckBoxList_Talnakh.Items[i].Text + " successfully taken out of Maintenance Mode.", StringComparison.CurrentCultureIgnoreCase))
+                                                        if (string.Equals(outp.BaseObject.ToString(), "SUCCESS: Done! Server " + CheckBoxList_array02.Items[i].Text + " successfully taken out of Maintenance Mode.", StringComparison.CurrentCultureIgnoreCase))
                                                         {
-                                                            this.CheckBoxList_Talnakh.Items[i].Text = CheckBoxList_Talnakh.Items[i].Text.ToLower();
-                                                            Name_Server = CheckBoxList_Talnakh.Items[i].Text.ToLower();
+                                                            this.CheckBoxList_array02.Items[i].Text = CheckBoxList_array02.Items[i].Text.ToLower();
+                                                            Name_Server = CheckBoxList_array02.Items[i].Text.ToLower();
                                                         }
                                                     }
                                                 }
-                                                //ResultBox.Text += "Username: " + HttpContext.Current.User.Identity.Name.Replace("0#.w|", "") + "\r\n";
                                                 ResultBox.Text += builder.ToString();
                                             }
                                         }
-                                        else { ResultBox.Text += "\r\n" + "No ping -> " + CheckBoxList_Talnakh.Items[i].Text; }
+                                        else { ResultBox.Text += "\r\n" + "No ping -> " + CheckBoxList_array02.Items[i].Text; }
                                     }
-                                    result_lower = Char.IsLower(CheckBoxList_Talnakh.Items[i].Text, 2);
+                                    result_lower = Char.IsLower(CheckBoxList_array02.Items[i].Text, 2);
                                     if (result_lower)
                                     {
-                                        comboBox.Items.Add(new ListItem(CheckBoxList_Talnakh.Items[i].Text, CheckBoxList_Talnakh.Items[i].Text));
+                                        comboBox.Items.Add(new ListItem(CheckBoxList_array02.Items[i].Text, CheckBoxList_array02.Items[i].Text));
                                     }
                                 }
                                 comboBox.DataBind();
@@ -721,7 +706,6 @@ namespace MaintenanceServers2019.VisualWebPart1
                                 //update inform to grid-----------------------------------------------------------------------------------------
                                 Create_GridTable();
                                 Script_Exchange_Reload();
-                                //Script_Exchange();
                                 using (ps = PowerShell.Create())
                                 {
                                     PSDataCollection<PSObject> output = new PSDataCollection<PSObject>();
@@ -755,12 +739,12 @@ namespace MaintenanceServers2019.VisualWebPart1
                                         }
                                     }
 
-                                    for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+                                    for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
                                     {
                                         foreach (PSObject outp in output)
                                         {
                                             get_value_outp(outp);
-                                            if (string.Equals(CheckBoxList_Talnakh.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & (ClusterNodeStatus.ToString().Equals("Paused") || ClusterNodeStatus.ToString().Equals("Error") || DBCopyAutoActivationPolicy.Equals("Blocked")) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
+                                            if (string.Equals(CheckBoxList_array02.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & (ClusterNodeStatus.ToString().Equals("Paused") || ClusterNodeStatus.ToString().Equals("Error") || DBCopyAutoActivationPolicy.Equals("Blocked")) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
                                             {
                                                 //check life server through ping
                                                 PingReply reply = pinger.Send(NameMailboxServer);
@@ -768,9 +752,9 @@ namespace MaintenanceServers2019.VisualWebPart1
                                                 check += NameMailboxServer;
                                                 Add_to_GridTable(NameMailboxServer.ToUpper(), "Start", pingable.ToString(), ClusterNodeStatus, DBCopyAutoActivationPolicy, DBCopyActivationDisabledAndMoveNow, DBPreference, MountedDatabase, QueueNumber, MailboxNumber, TimeStamp);
                                             }
-                                            else if (string.Equals(CheckBoxList_Talnakh.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
+                                            else if (string.Equals(CheckBoxList_array02.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
                                             {
-                                                this.CheckBoxList_Talnakh.Items[i].Text = CheckBoxList_Talnakh.Items[i].Text.ToLower();
+                                                this.CheckBoxList_array02.Items[i].Text = CheckBoxList_array02.Items[i].Text.ToLower();
                                                 //check life server through ping
                                                 PingReply reply = pinger.Send(NameMailboxServer);
                                                 pingable = reply.Status == IPStatus.Success;
@@ -802,11 +786,11 @@ namespace MaintenanceServers2019.VisualWebPart1
                                         }
                                     }
                                 }
-                                for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+                                for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
                                 {
-                                    if (CheckBoxList_Talnakh.Items[i].Selected)
+                                    if (CheckBoxList_array02.Items[i].Selected)
                                     {
-                                        result_lower = Char.IsLower(CheckBoxList_Talnakh.Items[i].Text, 2);
+                                        result_lower = Char.IsLower(CheckBoxList_array02.Items[i].Text, 2);
                                         if (result_lower)
                                         {
                                             bool_check_email = true;
@@ -840,13 +824,13 @@ namespace MaintenanceServers2019.VisualWebPart1
                         comboBox.SelectedValue = CheckBoxList_array01.Items[i].Text;
                     }
                 }
-                for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+                for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
                 {
-                    result_lower = Char.IsLower(CheckBoxList_Talnakh.Items[i].Text, 2);
-                    if (!CheckBoxList_Talnakh.Items[i].Selected & !check_comboBox & result_lower)
+                    result_lower = Char.IsLower(CheckBoxList_array02.Items[i].Text, 2);
+                    if (!CheckBoxList_array02.Items[i].Selected & !check_comboBox & result_lower)
                     {
                         check_comboBox = true;
-                        comboBox.SelectedValue = CheckBoxList_Talnakh.Items[i].Text;
+                        comboBox.SelectedValue = CheckBoxList_array02.Items[i].Text;
                     }
                 }
                 //-----------------------
@@ -859,7 +843,6 @@ namespace MaintenanceServers2019.VisualWebPart1
                 Page.Server.ScriptTimeout = 6400; // specify the timeout to 3600 seconds
                 using (SPLongOperation operation = new SPLongOperation(Page))
                 {
-                    //Script_Exchange();
                     Script_Exchange_Reload();
                     comboBox.Items.Clear(); //clearing combobox
                     using (ps = PowerShell.Create())
@@ -869,7 +852,6 @@ namespace MaintenanceServers2019.VisualWebPart1
                         IAsyncResult result = ps.BeginInvoke<PSObject, PSObject>(null, output);
                         ps.EndInvoke(result);
                         ps.Stop();
-                        //ResultBox.Text = string.Empty;
                         string check = string.Empty;
                         for (int i = 0; i < CheckBoxList_array01.Items.Count; i++)
                         {
@@ -902,23 +884,23 @@ namespace MaintenanceServers2019.VisualWebPart1
                             }
                         }
 
-                        for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+                        for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
                         {
                             foreach (PSObject outp in output)
                             {
                                 get_value_outp(outp);
-                                if (string.Equals(CheckBoxList_Talnakh.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & (ClusterNodeStatus.ToString().Equals("Paused") || ClusterNodeStatus.ToString().Equals("Error") || DBCopyAutoActivationPolicy.Equals("Blocked")) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
+                                if (string.Equals(CheckBoxList_array02.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & (ClusterNodeStatus.ToString().Equals("Paused") || ClusterNodeStatus.ToString().Equals("Error") || DBCopyAutoActivationPolicy.Equals("Blocked")) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
                                 {
-                                    this.CheckBoxList_Talnakh.Items[i].Text = CheckBoxList_Talnakh.Items[i].Text.ToUpper();
+                                    this.CheckBoxList_array02.Items[i].Text = CheckBoxList_array02.Items[i].Text.ToUpper();
                                     //check life server through ping
                                     PingReply reply = pinger.Send(NameMailboxServer);
                                     pingable = reply.Status == IPStatus.Success;
                                     check += NameMailboxServer;
                                     Add_to_GridTable(NameMailboxServer.ToUpper(), "Start", pingable.ToString(), ClusterNodeStatus, DBCopyAutoActivationPolicy, DBCopyActivationDisabledAndMoveNow, DBPreference, MountedDatabase, QueueNumber, MailboxNumber, TimeStamp);
                                 }
-                                else if (string.Equals(CheckBoxList_Talnakh.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
+                                else if (string.Equals(CheckBoxList_array02.Items[i].Text, NameMailboxServer, StringComparison.CurrentCultureIgnoreCase) & !check.Contains(NameMailboxServer) & !NameMailboxServer.Contains("tmp"))
                                 {
-                                    this.CheckBoxList_Talnakh.Items[i].Text = CheckBoxList_Talnakh.Items[i].Text.ToLower();
+                                    this.CheckBoxList_array02.Items[i].Text = CheckBoxList_array02.Items[i].Text.ToLower();
                                     //check life server through ping
                                     PingReply reply = pinger.Send(NameMailboxServer);
                                     pingable = reply.Status == IPStatus.Success;
@@ -926,10 +908,10 @@ namespace MaintenanceServers2019.VisualWebPart1
                                     Add_to_GridTable(NameMailboxServer.ToLower(), "Stop", pingable.ToString(), ClusterNodeStatus, DBCopyAutoActivationPolicy, DBCopyActivationDisabledAndMoveNow, DBPreference, MountedDatabase, QueueNumber, MailboxNumber, TimeStamp);
                                 }
                             }
-                            result_lower = Char.IsLower(CheckBoxList_Talnakh.Items[i].Text, 2);
+                            result_lower = Char.IsLower(CheckBoxList_array02.Items[i].Text, 2);
                             if (result_lower)
                             {
-                                comboBox.Items.Add(new ListItem(CheckBoxList_Talnakh.Items[i].Text, CheckBoxList_Talnakh.Items[i].Text));
+                                comboBox.Items.Add(new ListItem(CheckBoxList_array02.Items[i].Text, CheckBoxList_array02.Items[i].Text));
                             }
                         }
                         foreach (PSObject outp in output)
@@ -964,13 +946,13 @@ namespace MaintenanceServers2019.VisualWebPart1
                         comboBox.SelectedValue = CheckBoxList_array01.Items[i].Text;
                     }
                 }
-                for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+                for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
                 {
-                    result_lower = Char.IsLower(CheckBoxList_Talnakh.Items[i].Text, 2);
-                    if (!CheckBoxList_Talnakh.Items[i].Selected & !check_comboBox & result_lower)
+                    result_lower = Char.IsLower(CheckBoxList_array02.Items[i].Text, 2);
+                    if (!CheckBoxList_array02.Items[i].Selected & !check_comboBox & result_lower)
                     {
                         check_comboBox = true;
-                        comboBox.SelectedValue = CheckBoxList_Talnakh.Items[i].Text;
+                        comboBox.SelectedValue = CheckBoxList_array02.Items[i].Text;
                     }
                 }
                 //check life server through ping
@@ -991,11 +973,11 @@ namespace MaintenanceServers2019.VisualWebPart1
                                 check += CheckBoxList_array01.Items[i].Text;
                             }
                         }
-                        for (int i = 0; i < CheckBoxList_Talnakh.Items.Count; i++)
+                        for (int i = 0; i < CheckBoxList_array02.Items.Count; i++)
                         {
-                            if (CheckBoxList_Talnakh.Items[i].Selected)
+                            if (CheckBoxList_array02.Items[i].Selected)
                             {
-                                check += CheckBoxList_Talnakh.Items[i].Text;
+                                check += CheckBoxList_array02.Items[i].Text;
                             }
                         }
                         if (System.Text.RegularExpressions.Regex.IsMatch(check, "vn", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
