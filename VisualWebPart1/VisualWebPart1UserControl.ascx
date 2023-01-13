@@ -29,7 +29,7 @@
     <asp:TableRow>
         <asp:TableCell>
             <asp:Label ID="Label4" runat="server" Text="Array01:"></asp:Label>
-            <asp:CheckBoxList ID="CheckBoxList_Norilsk" runat="server" Font-Size="Small">
+            <asp:CheckBoxList ID="CheckBoxList_Array01" runat="server" Font-Size="Small">
                 <asp:ListItem Text=Server01>Server01</asp:ListItem>
                 <asp:ListItem Text=Server02>Server02</asp:ListItem>
                 <asp:ListItem Text=Server03>Server03</asp:ListItem>
@@ -37,7 +37,7 @@
                 <asp:ListItem Text=Server05>Server05</asp:ListItem>
             </asp:CheckBoxList>
             <asp:Label ID="Label3" runat="server" Text="Array02:"></asp:Label>
-            <asp:CheckBoxList ID="CheckBoxList_Talnakh" runat="server" Font-Size="Small">
+            <asp:CheckBoxList ID="CheckBoxList_Array02" runat="server" Font-Size="Small">
                 <asp:ListItem Text=Server01>Server01</asp:ListItem>
                 <asp:ListItem Text=Server02>Server02</asp:ListItem>
                 <asp:ListItem Text=Server03>Server03</asp:ListItem>
